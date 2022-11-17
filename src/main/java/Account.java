@@ -22,8 +22,18 @@ public class Account {
     }
 
     //Getter
+    public String getAccountStr(){
+        String[] account = {fullName, birthDate, email, password, String.valueOf(blocked)};
+        return String.join(",",account);
+    }
+
+    //Getter
     public String getEmail(){
         return email;
+    }
+
+    public void setBlocked(){
+        blocked = true;
     }
 }
 

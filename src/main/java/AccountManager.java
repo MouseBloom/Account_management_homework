@@ -4,5 +4,5 @@ public interface AccountManager {
 
     Account login(String email, String password) throws WrongCredentialsException, AccountBlockedException;
 
-    void removeAccount(String email, String password);
+    void removeAccount(String email, String password) throws WrongCredentialsException;
 }

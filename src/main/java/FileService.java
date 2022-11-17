@@ -29,18 +29,58 @@ public class FileService {
         }
     }
 
-    public static void writeCSV(String filepath, String[] account){
+    public static void writeCSV(String filepath, String[] account) {
         File file = new File(filepath);
-        try{
+        try {
             FileWriter outputfile = new FileWriter(file, true);
             CSVWriter writer = new CSVWriter(outputfile);
             writer.writeNext(account);
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            }
+        }
 
     }
+
+    public static void deleteRow(Account account, String path) {
+        try {
+            CSVReader reader2 = new CSVReader(new FileReader(path));
+            List<String[]> allElements = reader2.readAll();
+            int rowNumber = 0;
+            for (String[] s : allElements) {
+                rowNumber += 1;
+                if (s[2].toString().equals(account.getEmail())) {
+                    allElements.remove(rowNumber);
+                    FileWriter sw = new FileWriter(path);
+                    CSVWriter writer = new CSVWriter(sw);
+                    writer.writeAll(allElements);
+                    writer.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void deleteRowByEmail(String email, String path) {
+        try {
+            CSVReader reader2 = new CSVReader(new FileReader(path));
+            List<String[]> allElements = reader2.readAll();
+            int rowNumber = 0;
+            for (String[] s : allElements) {
+                rowNumber += 1;
+                if (s[2].toString().equals(email)) {
+                    allElements.remove(rowNumber);
+                    FileWriter sw = new FileWriter(path);
+                    CSVWriter writer = new CSVWriter(sw);
+                    writer.writeAll(allElements);
+                    writer.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
+

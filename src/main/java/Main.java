@@ -16,7 +16,7 @@ public class Main {
 
         try {
             FileAccountManager f = new FileAccountManager("C:\\Users\\olega\\Desktop\\JAVA COURSE\\Home_Works\\lab_5\\Accounts.csv");
-            f.login("o@mail.ru", "qwerty");
+            FileService.deleteRowByEmail("o@mail.ru","C:\\Users\\olega\\Desktop\\JAVA COURSE\\Home_Works\\lab_5\\Accounts.csv");
         }
         catch (Exception e){
             System.out.println(e);
