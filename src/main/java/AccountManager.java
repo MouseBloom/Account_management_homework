@@ -1,8 +1,8 @@
 public interface AccountManager {
 
-    void register(Account account);
+    void register(Account account) throws AccountAlreadyExistsException ;
 
-    void login(String email, String password);
+    Account login(String email, String password) throws WrongCredentialsException, AccountBlockedException;
 
     void removeAccount(String email, String password);
 }

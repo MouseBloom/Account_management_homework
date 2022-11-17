@@ -1,7 +1,4 @@
-import java.util.Collections;
-import java.util.List;
-
-public class Account implements AccountManager {
+public class Account {
     private String fullName;
     private String birthDate;
     private String email;
@@ -9,20 +6,6 @@ public class Account implements AccountManager {
     private boolean blocked;
 
 
-    @Override
-    public void register(Account account) {
-
-    }
-
-    @Override
-    public void removeAccount(String email, String password) {
-
-    }
-
-    @Override
-    public void login(String email, String password){
-
-    }
 
     public Account(String fio, String birthDate, String email, String password ){
         fullName = fio;
@@ -38,5 +21,9 @@ public class Account implements AccountManager {
         return account;
     }
 
+    //Getter
+    public String getEmail(){
+        return email;
+    }
 }
 
