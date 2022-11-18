@@ -6,7 +6,7 @@ import java.util.List;
 public class FailedLoginCounter {
     private static FailedLoginCounter instance;
 
-    private static HashMap<Account, Integer> attemptsCounter = new HashMap<>();
+    private static HashMap<String, Integer> attemptsCounter = new HashMap<>();
 
     public static synchronized FailedLoginCounter getInstance() {
         if (instance == null) {
@@ -16,15 +16,17 @@ public class FailedLoginCounter {
     }
 
     public static void countAttempts(Account account, String path) {
+        String email = account.getEmail();
 
-        if (!attemptsCounter.containsKey(account)) {
-            attemptsCounter.put(account, 0);
+        if (!attemptsCounter.containsKey(email)) {
+            attemptsCounter.put(email, 0);
         }
 
-        attemptsCounter.put(account, attemptsCounter.get(account) + 1);
-        if (attemptsCounter.get(account) == 5) {
+        attemptsCounter.put(email, attemptsCounter.get(email) + 1);
+        //System.out.println(attemptsCounter);
+        if (attemptsCounter.get(email) == 5) {
             try{
-                FileService.deleteRow(account, path);
+                FileService.deleteRowByEmail(email, path);
                 account.setBlocked();
                 FileService.writeCSV(path, account.getAccount());
             } catch (Exception e) {
@@ -35,7 +37,8 @@ public class FailedLoginCounter {
     }
 
         public static void nullifyCounter(Account account) {
-            attemptsCounter.remove(account);
+            String email = account.getEmail();
+            attemptsCounter.remove(email);
         }
 
     }

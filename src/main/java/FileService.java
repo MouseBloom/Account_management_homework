@@ -69,6 +69,9 @@ public class FileService {
             List<String[]> allElements = reader2.readAll();
             int rowNumber = 0;
             for (String[] s : allElements) {
+                if (s.length < 5){
+                    continue;
+                }
                 rowNumber += 1;
                 if (s[2].toString().equals(email)) {
                     allElements.remove(rowNumber);
