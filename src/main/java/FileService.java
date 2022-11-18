@@ -8,6 +8,7 @@ import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
+//Sigleton to work with CSV files
 public class FileService {
     private static FileService instance;
 
@@ -21,6 +22,7 @@ public class FileService {
         return instance;
     }
 
+    //Returns List of Arrays with account data
     public static List<String[]> readAllLines(Path filePath) throws Exception {
         try (Reader reader = Files.newBufferedReader(filePath)) {
             try (CSVReader csvReader = new CSVReader(reader)) {
@@ -29,6 +31,7 @@ public class FileService {
         }
     }
 
+    //Writes new record to CSV
     public static void writeCSV(String filepath, String[] account) {
         File file = new File(filepath);
         try {
@@ -43,6 +46,7 @@ public class FileService {
 
     }
 
+    //Deletes row in CSV by Account object, not used in code because deleting by email is more optimal
     public static void deleteRow(Account account, String path) {
         try {
             CSVReader reader2 = new CSVReader(new FileReader(path));
@@ -63,13 +67,14 @@ public class FileService {
         }
     }
 
+    //Deletes row by email, I understood that in this case it`s more convenient than by Account object
     public static void deleteRowByEmail(String email, String path) {
         try {
             CSVReader reader2 = new CSVReader(new FileReader(path));
             List<String[]> allElements = reader2.readAll();
             int rowNumber = 0;
             for (String[] s : allElements) {
-                if (s.length < 5){
+                if (s.length < 5) {
                     continue;
                 }
                 rowNumber += 1;

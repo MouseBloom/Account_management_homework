@@ -1,3 +1,4 @@
+//Class of Account objects
 public class Account {
     private String fullName;
     private String birthDate;
@@ -6,8 +7,7 @@ public class Account {
     private boolean blocked;
 
 
-
-    public Account(String fio, String birthDate, String email, String password ){
+    public Account(String fio, String birthDate, String email, String password) {
         fullName = fio;
         this.birthDate = birthDate;
         this.email = email;
@@ -16,23 +16,24 @@ public class Account {
     }
 
     //Getter
-    public String[] getAccount(){
+    public String[] getAccount() {
         String[] account = {fullName, birthDate, email, password, String.valueOf(blocked)};
         return account;
     }
 
     //Getter
-    public String getAccountStr(){
+    public String getAccountStr() {
         String[] account = {fullName, birthDate, email, password, String.valueOf(blocked)};
-        return String.join(",",account);
+        return String.join(",", account);
     }
 
     //Getter
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public void setBlocked(){
+    //Setter
+    public void setBlocked() {
         blocked = true;
     }
 }

@@ -2,6 +2,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+//Class that works with Account objects
 public class FileAccountManager implements AccountManager {
 
     private static String filePath;
@@ -22,7 +23,8 @@ public class FileAccountManager implements AccountManager {
         String mail = account.getEmail();
         if (accounts.size() != 0) {
             for (String[] strings : accounts) {
-                if (strings.length < 2){;
+                if (strings.length < 2) {
+                    ;
                     continue;
                 }
                 if (strings[2].toString().equals(mail)) {
@@ -36,7 +38,7 @@ public class FileAccountManager implements AccountManager {
     @Override
     public Account login(String email, String password) throws WrongCredentialsException, AccountBlockedException {
         for (String[] strings : accounts) {
-            if (strings.length <2){
+            if (strings.length < 2) {
                 continue;
             }
             if (strings[2].toString().equals(email)) {
@@ -61,7 +63,7 @@ public class FileAccountManager implements AccountManager {
     @Override
     public void removeAccount(String email, String password) throws WrongCredentialsException {
         for (String[] strings : accounts) {
-            if (strings.length < 2){
+            if (strings.length < 2) {
                 continue;
             }
             //System.out.println(strings[2].toString());

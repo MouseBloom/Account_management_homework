@@ -1,8 +1,10 @@
 import com.opencsv.CSVReader;
+
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 
+//Singleton to count attempts to login
 public class FailedLoginCounter {
     private static FailedLoginCounter instance;
 
@@ -15,6 +17,7 @@ public class FailedLoginCounter {
         return instance;
     }
 
+    //Blockes account after 5 unsuccessful attempts
     public static void countAttempts(Account account, String path) {
         String email = account.getEmail();
 
@@ -25,7 +28,7 @@ public class FailedLoginCounter {
         attemptsCounter.put(email, attemptsCounter.get(email) + 1);
         //System.out.println(attemptsCounter);
         if (attemptsCounter.get(email) == 5) {
-            try{
+            try {
                 FileService.deleteRowByEmail(email, path);
                 account.setBlocked();
                 FileService.writeCSV(path, account.getAccount());
@@ -36,11 +39,12 @@ public class FailedLoginCounter {
         }
     }
 
-        public static void nullifyCounter(Account account) {
-            String email = account.getEmail();
-            attemptsCounter.remove(email);
-        }
-
+    //Deletes attempts record after successful login
+    public static void nullifyCounter(Account account) {
+        String email = account.getEmail();
+        attemptsCounter.remove(email);
     }
+
+}
 
 
