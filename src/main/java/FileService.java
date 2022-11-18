@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 //package com.zetcode;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -73,17 +74,19 @@ public class FileService {
             CSVReader reader2 = new CSVReader(new FileReader(path));
             List<String[]> allElements = reader2.readAll();
             int rowNumber = 0;
-            for (String[] s : allElements) {
-                if (s.length < 5) {
+            for (ListIterator<String[]> it = allElements.listIterator(); it.hasNext();) {
+                String[] value = it.next();
+                if (value.length <2){
                     continue;
                 }
                 rowNumber += 1;
-                if (s[2].toString().equals(email)) {
-                    allElements.remove(rowNumber);
+                if (value[2].toString().equals(email)) {
+                    it.remove();
                     FileWriter sw = new FileWriter(path);
                     CSVWriter writer = new CSVWriter(sw);
                     writer.writeAll(allElements);
                     writer.close();
+                    sw.close();
                 }
             }
         } catch (Exception e) {
